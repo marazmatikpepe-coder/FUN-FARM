@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Hay Day</title>
+    <title>GitHub Hay Day Extended</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,24 +11,63 @@
     <div id="game-container">
         <!-- Верхняя панель ресурсов -->
         <header id="ui-panel">
-            <div class="stat">Монеты: <span id="ui-coins">100</span> 🪙</div>
-            <div class="stat">Опыт: <span id="ui-xp">0</span> 🌟 (Ур. <span id="ui-level">1</span>)</div>
-            <div class="stat">Силосная башня: <span id="ui-silo">0</span>/<span id="ui-silo-max">50</span> 🌾</div>
-            <div class="stat">Амбар: <span id="ui-barn">0</span>/<span id="ui-barn-max">50</span> 📦</div>
+            <div class="stat">🪙 Монеты: <span id="ui-coins">0</span></div>
+            <div class="stat">🌟 Ур. <span id="ui-level">1</span> (<span id="ui-xp">0</span> XP)</div>
+            <div class="stat">🌾 Силос: <span id="ui-silo">0</span>/<span id="ui-silo-max">50</span></div>
+            <div class="stat">📦 Амбар: <span id="ui-barn">0</span>/<span id="ui-barn-max">50</span></div>
         </header>
 
-        <!-- Основное игровое поле -->
-        <main id="game-field">
-            <section id="farm-grid" class="grid-section"></section>
-        </main>
+        <!-- Меню переключения разделов -->
+        <nav id="game-tabs">
+            <button class="tab-btn active" onclick="window.game.switchTab('farm')">🌾 Поля</button>
+            <button class="tab-btn" onclick="window.game.switchTab('animals')">🐷 Свиньи</button>
+            <button class="tab-btn" onclick="window.game.switchTab('clearance')">🪓 Расчистка</button>
+            <button class="tab-btn" onclick="window.game.switchTab('decor')">🌺 Декор</button>
+            <button class="tab-btn" onclick="window.game.switchTab('market')">🚚 Рынок</button>
+        </nav>
 
-        <!-- Нижняя панель управления -->
-        <footer id="controls">
-            <button onclick="window.game.buySeeds()">Купить семена пшеницы (-5 🪙)</button>
-        </footer>
+        <!-- Основная рабочая зона -->
+        <main id="game-field">
+            <!-- Вкладка: Грядки -->
+            <div id="tab-farm" class="tab-content active-content">
+                <h3>Грядки с пшеницей</h3>
+                <div id="farm-grid" class="grid-section"></div>
+                <div class="actions"><button onclick="window.game.buySeeds()">Купить семя пшеницы (-5 🪙)</button></div>
+            </div>
+
+            <!-- Вкладка: Свиньи -->
+            <div id="tab-animals" class="tab-content">
+                <h3>Загон для свиней</h3>
+                <div id="pig-pen-container"></div>
+            </div>
+
+            <!-- Вкладка: Расчистка территории -->
+            <div id="tab-clearance" class="tab-content">
+                <h3>Расчистка территории фермы</h3>
+                <p>Ваши инструменты: 🪓 Топоры: <span id="inv-axes">0</span> | 🧨 Динамит: <span id="inv-dynamite">0</span></p>
+                <div id="clearance-grid" class="grid-section"></div>
+                <div class="actions">
+                    <button onclick="window.game.buyTool('axe')">Купить Топор (-15 🪙)</button>
+                    <button onclick="window.game.buyTool('dynamite')">Купить Динамит (-25 🪙)</button>
+                </div>
+            </div>
+
+            <!-- Вкладка: Косметика и декор -->
+            <div id="tab-decor" class="tab-content">
+                <h3>Магазин косметики и декора</h3>
+                <div id="decor-shop" class="shop-list"></div>
+                <h3>Установленный декор на ферме</h3>
+                <div id="placed-decor-list"></div>
+            </div>
+
+            <!-- Вкладка: Рынок / Доска заказов -->
+            <div id="tab-market" class="tab-content">
+                <h3>Доска заказов (Рынок)</h3>
+                <div id="orders-list"></div>
+            </div>
+        </main>
     </div>
 
-    <!-- Подключаем скрипты (порядок важен!) -->
     <script src="state.js"></script>
     <script src="game.js"></script>
 </body>
