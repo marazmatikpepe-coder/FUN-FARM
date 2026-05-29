@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Hay Day</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <!-- Верхняя панель ресурсов -->
+        <header id="ui-panel">
+            <div class="stat">Монеты: <span id="ui-coins">100</span> 🪙</div>
+            <div class="stat">Опыт: <span id="ui-xp">0</span> 🌟 (Ур. <span id="ui-level">1</span>)</div>
+            <div class="stat">Силосная башня: <span id="ui-silo">0</span>/<span id="ui-silo-max">50</span> 🌾</div>
+            <div class="stat">Амбар: <span id="ui-barn">0</span>/<span id="ui-barn-max">50</span> 📦</div>
+        </header>
+
+        <!-- Основное игровое поле -->
+        <main id="game-field">
+            <section id="farm-grid" class="grid-section"></section>
+        </main>
+
+        <!-- Нижняя панель управления -->
+        <footer id="controls">
+            <button onclick="window.game.buySeeds()">Купить семена пшеницы (-5 🪙)</button>
+        </footer>
+    </div>
+
+    <!-- Подключаем скрипты (порядок важен!) -->
+    <script src="state.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
